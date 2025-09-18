@@ -16,10 +16,10 @@ export default ({
     <Popover.Anchor />
     <Popover.Portal>
       <Popover.Content
-        sideOffset={10}
+        sideOffset={8}
         side={side}
         align={align}
-        className="bg-bolt-elements-background-depth-2 text-bolt-elements-item-contentAccent p-2 rounded-md shadow-xl z-workbench"
+        className="bg-bolt-elements-background-depth-2 text-bolt-elements-item-contentAccent p-1.5 rounded-sm shadow-xl z-workbench"
       >
         {children}
         <Popover.Arrow className="bg-bolt-elements-item-background-depth-2" />
