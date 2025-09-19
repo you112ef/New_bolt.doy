@@ -17,10 +17,11 @@
 
   --cm-activeLineBackgroundColor: var(--bolt-elements-editor-activeLineBackgroundColor, rgb(224 231 235 / 30%));
 
-  /* Cursor */
+  /* Cursor - Enhanced for better visibility */
 
-  --cm-cursor-width: 1px;
-  --cm-cursor-backgroundColor: var(--bolt-elements-editor-cursorColor, var(--bolt-elements-textSecondary));
+  --cm-cursor-width: 2px;
+  --cm-cursor-backgroundColor: var(--bolt-elements-editor-cursorColor, var(--bolt-elements-textPrimary));
+  --cm-cursor-borderColor: var(--bolt-elements-editor-cursorColor, var(--bolt-elements-textPrimary));
 
   /* Matching Brackets */
 
@@ -132,4 +133,262 @@ html[data-theme='dark'] {
   --bolt-elements-editor-matchingBracketBackgroundColor: rgba(66, 180, 255, 0.3);
   --bolt-elements-editor-search-button-backgroundColor: theme('colors.gray.800');
   --bolt-elements-editor-search-button-backgroundColorHover: theme('colors.alpha.white.10');
+}
+
+/* Enhanced CodeMirror Editor Styling */
+.cm-editor {
+  font-family: 'Fira Code', 'JetBrains Mono', 'Cascadia Code', 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', 'Source Code Pro', monospace;
+  font-size: 13px;
+  line-height: 1.5;
+  letter-spacing: 0.01em;
+  font-feature-settings: 'liga' 1, 'calt' 1;
+  font-variant-ligatures: contextual;
+}
+
+/* Enhanced cursor styling */
+.cm-cursor {
+  border-left: var(--cm-cursor-width) solid var(--cm-cursor-backgroundColor);
+  border-left-color: var(--cm-cursor-borderColor);
+  margin-left: -1px;
+  animation: cm-blink 1s infinite;
+}
+
+@keyframes cm-blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+/* Better selection styling */
+.cm-selectionBackground {
+  background: var(--cm-selection-backgroundColorFocused) !important;
+  opacity: var(--cm-selection-backgroundOpacityFocused);
+}
+
+/* Enhanced scrollbar styling */
+.cm-scroller {
+  scrollbar-width: thin;
+  scrollbar-color: var(--bolt-elements-textTertiary) transparent;
+}
+
+.cm-scroller::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.cm-scroller::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.cm-scroller::-webkit-scrollbar-thumb {
+  background: var(--bolt-elements-textTertiary);
+  border-radius: 4px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+.cm-scroller::-webkit-scrollbar-thumb:hover {
+  background: var(--bolt-elements-textSecondary);
+  background-clip: content-box;
+}
+
+.cm-scroller::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* Enhanced gutter styling */
+.cm-gutters {
+  background: var(--cm-gutter-backgroundColor);
+  border-right: 1px solid var(--bolt-elements-borderColor);
+  min-width: 3ch;
+}
+
+.cm-lineNumbers .cm-gutterElement {
+  padding: 0 8px 0 4px;
+  min-width: 2ch;
+  text-align: right;
+  color: var(--cm-gutter-textColor);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.cm-activeLineGutter {
+  background: var(--cm-activeLineBackgroundColor);
+  color: var(--cm-gutter-activeLineTextColor);
+  font-weight: 600;
+}
+
+/* Enhanced fold gutter */
+.cm-foldGutter {
+  width: 16px;
+  cursor: pointer;
+}
+
+.cm-foldGutter .cm-gutterElement {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: var(--cm-foldGutter-textColor);
+  transition: color 0.2s ease;
+}
+
+.cm-foldGutter .cm-gutterElement:hover {
+  color: var(--cm-foldGutter-textColorHover);
+}
+
+/* Enhanced active line highlighting */
+.cm-activeLine {
+  background: var(--cm-activeLineBackgroundColor);
+}
+
+/* Better bracket matching */
+.cm-matchingBracket {
+  background: var(--cm-matching-bracket);
+  border-radius: 2px;
+  font-weight: 600;
+}
+
+.cm-nonmatchingBracket {
+  background: rgba(255, 0, 0, 0.2);
+  border-radius: 2px;
+}
+
+/* Enhanced search styling */
+.cm-searchMatch {
+  background: var(--cm-searchMatch-backgroundColor);
+  border-radius: 2px;
+  padding: 0 2px;
+}
+
+.cm-searchMatch.cm-searchMatch-selected {
+  background: var(--cm-selection-backgroundColorFocused);
+  opacity: var(--cm-selection-backgroundOpacityFocused);
+}
+
+/* Enhanced tooltip styling */
+.cm-tooltip {
+  background: var(--cm-tooltip-backgroundColor);
+  color: var(--cm-tooltip-textColor);
+  border: 1px solid var(--cm-tooltip-borderColor);
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  font-size: 12px;
+  max-width: 300px;
+  z-index: 1000;
+}
+
+.cm-tooltip.cm-tooltip-autocomplete {
+  background: var(--cm-tooltip-backgroundColor);
+  border: 1px solid var(--cm-tooltip-borderColor);
+}
+
+.cm-tooltip-autocomplete .cm-completionIcon {
+  margin-right: 8px;
+  width: 16px;
+  height: 16px;
+}
+
+.cm-tooltip-autocomplete .cm-completionLabel {
+  font-weight: 500;
+}
+
+.cm-tooltip-autocomplete .cm-completionDetail {
+  color: var(--bolt-elements-textSecondary);
+  font-size: 11px;
+  margin-left: 8px;
+}
+
+/* Read-only tooltip styling */
+.cm-readonly-tooltip {
+  background: var(--bolt-elements-item-backgroundDanger);
+  color: var(--bolt-elements-item-contentDanger);
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border: 1px solid var(--bolt-elements-borderColor);
+}
+
+/* Enhanced focus styling */
+.cm-editor:focus-within,
+.cm-editor.cm-focused {
+  outline: 2px solid var(--bolt-elements-borderColorActive);
+  outline-offset: 2px;
+  border-radius: 4px;
+  box-shadow: 0 0 0 4px rgba(156, 125, 255, 0.1);
+}
+
+/* Better mobile touch targets */
+@media (max-width: 768px) {
+  .cm-editor {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  
+  .cm-lineNumbers .cm-gutterElement {
+    padding: 0 6px 0 3px;
+    font-size: 13px;
+  }
+  
+  .cm-foldGutter {
+    width: 20px;
+  }
+  
+  .cm-scroller::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+}
+
+/* Improved syntax highlighting for better readability */
+.cm-editor .cm-keyword {
+  color: #c678dd;
+  font-weight: 600;
+}
+
+.cm-editor .cm-string {
+  color: #98c379;
+}
+
+.cm-editor .cm-comment {
+  color: #5c6370;
+  font-style: italic;
+}
+
+.cm-editor .cm-number {
+  color: #d19a66;
+}
+
+.cm-editor .cm-variable {
+  color: #e06c75;
+}
+
+.cm-editor .cm-def {
+  color: #61afef;
+  font-weight: 600;
+}
+
+.cm-editor .cm-type {
+  color: #e5c07b;
+}
+
+.cm-editor .cm-property {
+  color: #56b6c2;
+}
+
+.cm-editor .cm-operator {
+  color: #c678dd;
+}
+
+.cm-editor .cm-bracket {
+  color: #abb2bf;
+}
+
+.cm-editor .cm-tag {
+  color: #e06c75;
+}
+
+.cm-editor .cm-attribute {
+  color: #d19a66;
 }

@@ -43,12 +43,28 @@ export const Terminal = memo(
           disableStdin: readonly,
           theme: getTerminalTheme(readonly ? { cursor: '#00000000' } : {}),
           fontSize: 12,
-          fontFamily: 'Menlo, courier-new, courier, monospace',
+          fontFamily: 'Fira Code, JetBrains Mono, Cascadia Code, SF Mono, Monaco, Inconsolata, Roboto Mono, Source Code Pro, Menlo, courier-new, courier, monospace',
           allowProposedApi: true,
           scrollback: 1000,
+          lineHeight: 1.4,
+          letterSpacing: 0.02,
 
-          // Enable better clipboard handling
+          // Enhanced clipboard and selection handling
           rightClickSelectsWord: true,
+          macOptionIsMeta: true,
+          macOptionClickChangesSelection: true,
+          
+          // Better touch support
+          fastScrollModifier: 'shift',
+          fastScrollSensitivity: 5,
+          
+          // Improved accessibility
+          screenReaderMode: false,
+          tabStopWidth: 4,
+          
+          // Better rendering performance
+          rendererType: 'canvas',
+          allowTransparency: true,
         });
 
         terminalRef.current = terminal;
@@ -73,14 +89,16 @@ export const Terminal = memo(
         }
 
         const resizeObserver = new ResizeObserver((entries) => {
-          // Debounce resize events
+          // Debounce resize events for better performance
           if (entries.length > 0) {
-            try {
-              fitAddon.fit();
-              onTerminalResize?.(terminal.cols, terminal.rows);
-            } catch (error) {
-              logger.error(`Resize error [${id}]:`, error);
-            }
+            requestAnimationFrame(() => {
+              try {
+                fitAddon.fit();
+                onTerminalResize?.(terminal.cols, terminal.rows);
+              } catch (error) {
+                logger.error(`Resize error [${id}]:`, error);
+              }
+            });
           }
         });
 

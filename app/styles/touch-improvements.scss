@@ -1,0 +1,287 @@
+/* Touch and Interaction Improvements */
+
+/* Enhanced touch targets for better mobile experience */
+@media (hover: none) and (pointer: coarse) {
+  /* Increase touch targets for mobile devices */
+  button, 
+  .btn, 
+  [role="button"],
+  input[type="button"],
+  input[type="submit"],
+  input[type="reset"] {
+    min-height: 44px;
+    min-width: 44px;
+    padding: 12px 16px;
+  }
+  
+  /* Better spacing for touch interactions */
+  .icon-button,
+  .icon-btn {
+    min-height: 44px;
+    min-width: 44px;
+    padding: 12px;
+  }
+  
+  /* Improved text selection */
+  * {
+    -webkit-touch-callout: default;
+    -webkit-user-select: text;
+    -khtml-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+  }
+  
+  /* Better scrolling on mobile */
+  .scrollable {
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+  }
+}
+
+/* Enhanced focus indicators for better accessibility */
+*:focus-visible {
+  outline: 2px solid var(--bolt-elements-borderColorActive);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Improved button states */
+button:active,
+.btn:active,
+[role="button"]:active {
+  transform: scale(0.98);
+  transition: transform 0.1s ease;
+}
+
+/* Better hover states for devices that support hover */
+@media (hover: hover) and (pointer: fine) {
+  button:hover,
+  .btn:hover,
+  [role="button"]:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease;
+  }
+}
+
+/* Enhanced scrollbar styling for better touch interaction */
+.scrollable {
+  scrollbar-width: thin;
+  scrollbar-color: var(--bolt-elements-textTertiary) transparent;
+}
+
+.scrollable::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.scrollable::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scrollable::-webkit-scrollbar-thumb {
+  background: var(--bolt-elements-textTertiary);
+  border-radius: 4px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+.scrollable::-webkit-scrollbar-thumb:hover {
+  background: var(--bolt-elements-textSecondary);
+  background-clip: content-box;
+}
+
+.scrollable::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* Better text selection */
+::selection {
+  background: var(--bolt-elements-selection-backgroundColor, #42b4ff);
+  color: var(--bolt-elements-textPrimary);
+}
+
+::-moz-selection {
+  background: var(--bolt-elements-selection-backgroundColor, #42b4ff);
+  color: var(--bolt-elements-textPrimary);
+}
+
+/* Improved drag and drop visual feedback */
+.dragging {
+  opacity: 0.5;
+  transform: scale(1.05);
+  transition: all 0.2s ease;
+}
+
+.drag-over {
+  background: var(--bolt-elements-item-backgroundAccent);
+  border: 2px dashed var(--bolt-elements-borderColorActive);
+  border-radius: 8px;
+}
+
+/* Enhanced loading states */
+.loading {
+  position: relative;
+  overflow: hidden;
+}
+
+.loading::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  animation: loading-shimmer 1.5s infinite;
+}
+
+@keyframes loading-shimmer {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+/* Better error states */
+.error {
+  border-color: var(--bolt-elements-item-contentDanger);
+  background: var(--bolt-elements-item-backgroundDanger);
+  animation: error-shake 0.5s ease-in-out;
+}
+
+@keyframes error-shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+/* Enhanced success states */
+.success {
+  border-color: var(--bolt-elements-icon-success);
+  background: var(--bolt-elements-item-backgroundAccent);
+  animation: success-pulse 0.6s ease-in-out;
+}
+
+@keyframes success-pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+  100% { transform: scale(1); }
+}
+
+/* Improved form controls */
+input, textarea, select {
+  transition: all 0.2s ease;
+}
+
+input:focus, textarea:focus, select:focus {
+  border-color: var(--bolt-elements-borderColorActive);
+  box-shadow: 0 0 0 3px rgba(156, 125, 255, 0.1);
+  outline: none;
+}
+
+/* Better disabled states */
+button:disabled,
+.btn:disabled,
+input:disabled,
+textarea:disabled,
+select:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* Enhanced tooltip positioning for touch devices */
+.tooltip {
+  position: absolute;
+  z-index: 1000;
+  padding: 8px 12px;
+  background: var(--bolt-elements-bg-depth-1);
+  color: var(--bolt-elements-textPrimary);
+  border: 1px solid var(--bolt-elements-borderColor);
+  border-radius: 6px;
+  font-size: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  pointer-events: none;
+  max-width: 200px;
+  word-wrap: break-word;
+}
+
+/* Better modal and dialog interactions */
+.modal-backdrop {
+  backdrop-filter: blur(4px);
+  background: rgba(0, 0, 0, 0.5);
+  transition: opacity 0.3s ease;
+}
+
+.modal-content {
+  transform: scale(0.9);
+  transition: transform 0.3s ease;
+}
+
+.modal-content.show {
+  transform: scale(1);
+}
+
+/* Improved keyboard navigation */
+.keyboard-navigation *:focus {
+  outline: 2px solid var(--bolt-elements-borderColorActive);
+  outline-offset: 2px;
+}
+
+/* Better touch feedback for interactive elements */
+.touchable {
+  -webkit-tap-highlight-color: rgba(156, 125, 255, 0.2);
+  tap-highlight-color: rgba(156, 125, 255, 0.2);
+}
+
+/* Enhanced animation performance */
+.animate {
+  will-change: transform, opacity;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Better responsive typography */
+@media (max-width: 768px) {
+  body {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  
+  h1 { font-size: 1.8rem; }
+  h2 { font-size: 1.5rem; }
+  h3 { font-size: 1.3rem; }
+  h4 { font-size: 1.1rem; }
+  h5 { font-size: 1rem; }
+  h6 { font-size: 0.9rem; }
+}
+
+/* Improved dark mode transitions */
+* {
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+/* Better print styles */
+@media print {
+  * {
+    background: transparent !important;
+    color: black !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+  
+  .no-print {
+    display: none !important;
+  }
+}

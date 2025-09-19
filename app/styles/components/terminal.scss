@@ -1,4 +1,68 @@
 .xterm {
   padding: 0.5rem;
   font-size: 12px;
+  font-family: 'Fira Code', 'JetBrains Mono', 'Cascadia Code', 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', 'Source Code Pro', monospace;
+  line-height: 1.4;
+  letter-spacing: 0.02em;
+}
+
+/* Enhanced terminal styling for better touch interaction */
+.xterm .xterm-viewport {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
+}
+
+.xterm .xterm-viewport::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.xterm .xterm-viewport::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.xterm .xterm-viewport::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 3px;
+}
+
+.xterm .xterm-viewport::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+/* Terminal selection styling */
+.xterm .xterm-selection {
+  background: rgba(255, 255, 255, 0.2) !important;
+}
+
+/* Cursor styling improvements */
+.xterm .xterm-cursor {
+  border-left-width: 2px;
+  border-left-style: solid;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+/* Terminal focus improvements */
+.xterm:focus-within {
+  outline: 2px solid var(--bolt-elements-borderColorActive);
+  outline-offset: 2px;
+}
+
+/* Better touch targets for mobile */
+@media (max-width: 768px) {
+  .xterm {
+    padding: 0.75rem;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  
+  .xterm .xterm-viewport::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
 }
